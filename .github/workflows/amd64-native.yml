@@ -1,0 +1,58 @@
+name: Native-AMD64
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/setup-java@v2
+        with:
+          distribution: 'liberica' # See 'Supported distributions' for available options
+          java-version: '21'
+      - name: Checkout master
+        uses: actions/checkout@v3
+        with:
+          submodules: true
+      #Build Image
+      - name: Build Image
+        run: ./mvnw -Pnative spring-boot:build-image
+      #Login to DockerHub
+      - name: Login to DockerHub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      #Tag the version    
+      #Deploy the image to the Docker registry
+      - name: Push Images to Docker Registry
+        run: docker push -a dashaun/com.javagrunt.listener.youtube
+
+
+  manifest:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Login to DockerHub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: pull-arm64
+        uses: nick-fields/retry@v2
+        with:
+          timeout_minutes: 5
+          retry_wait_seconds: 60
+          max_attempts: 6
+          command: docker pull dashaun/com.javagrunt.listener.youtube:$GITHUB_REF_NAME-aarch_64
+      - name: create-manifest
+        run: |
+          docker manifest create dashaun/com.javagrunt.listener.youtube:$GITHUB_REF_NAME --amend dashaun/com.javagrunt.listener.youtube:$GITHUB_REF_NAME-x86_64 --amend dashaun/com.javagrunt.listener.youtube:$GITHUB_REF_NAME-aarch_64
+          docker manifest push dashaun/com.javagrunt.listener.youtube:$GITHUB_REF_NAME
+          docker manifest create dashaun/com.javagrunt.listener.youtube:latest --amend dashaun/com.javagrunt.listener.youtube:$GITHUB_REF_NAME-x86_64 --amend dashaun/com.javagrunt.listener.youtube:$GITHUB_REF_NAME-aarch_64
+          docker manifest push dashaun/com.javagrunt.listener.youtube:latest
