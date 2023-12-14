@@ -140,7 +140,7 @@
           <image>
             <builder>dashaun/builder:tiny</builder>
             <createdDate>now</createdDate>
-            <name>${project.groupId}/${project.artifactId}:v${project.version}-${os.detected.arch}</name>
+            <name>dashaun/${project.name}:v${project.version}-${os.detected.arch}</name>
           </image>
         </configuration>
       </plugin>
