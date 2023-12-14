@@ -21,7 +21,7 @@ class YouTubeController {
 	Logger logger = LoggerFactory.getLogger(YouTubeController.class);
 
 	@PostMapping("/")
-	String subscriber(@RequestBody String atomXml) {
+	String listen(@RequestBody String atomXml) {
 		logger.info("Received: " + atomXml);
 		return "OK";
 	}	

@@ -1,0 +1,11 @@
+= YouTube Listener Service
+
+Listens for webhook events from PubSubHubbub, then, does nothing, yet.
+
+Check that the service is health:
+
+operation::health[snippets='httpie-request']
+
+Post the Atom XML event to the service:
+
+operation::listen[snippets='httpie-request']
