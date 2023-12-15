@@ -24,5 +24,10 @@ class YouTubeController {
 	String listen(@RequestBody String atomXml) {
 		logger.info("Received: " + atomXml);
 		return "OK";
-	}	
+	}
+	
+	@GetMapping(value = "/")
+	String hello(){
+		return "OK";
+	}
 }

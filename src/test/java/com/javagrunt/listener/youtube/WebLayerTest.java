@@ -36,6 +36,21 @@ class WebLayerTest {
 	}
 
 	@Test
+	public void getShouldReturnOk() {
+		given(this.spec)
+				.filter(document("hello",
+						preprocessRequest(modifyUris()
+								.scheme("https")
+								.host("youtube-listener.javagrunt.com")
+								.removePort())))
+				.when()
+				.port(this.port)
+				.get("/")
+				.then()
+				.assertThat().statusCode(is(200));
+	}
+
+	@Test
 	void postShouldReturnSuccess() throws Exception {
 		given(this.spec)
 				.filter(document("listen",

@@ -2,10 +2,14 @@
 
 Listens for webhook events from PubSubHubbub, then, does nothing, yet.
 
+Respond to the subscription request:
+
+operation::hello[snippets='httpie-request,response-body']
+
 Check that the service is health:
 
-operation::health[snippets='httpie-request']
+operation::health[snippets='httpie-request,response-body']
 
 Post the Atom XML event to the service:
 
-operation::listen[snippets='httpie-request']
+operation::listen[snippets='httpie-request,response-body']
