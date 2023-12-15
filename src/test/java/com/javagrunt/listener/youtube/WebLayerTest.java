@@ -36,7 +36,7 @@ class WebLayerTest {
 	}
 
 	@Test
-	public void getShouldReturnOk() {
+	public void getShouldEchoHubChallenge() {
 		given(this.spec)
 				.filter(document("hello",
 						preprocessRequest(modifyUris()
@@ -45,9 +45,10 @@ class WebLayerTest {
 								.removePort())))
 				.when()
 				.port(this.port)
-				.get("/")
+				.get("/?hub.mode=subscribe&hub.challenge=CHALLENGE_STRING&hub.topic=somthingcool")
 				.then()
-				.assertThat().statusCode(is(200));
+				.assertThat().statusCode(is(200))
+				.assertThat().body(is("CHALLENGE_STRING"));
 	}
 
 	@Test

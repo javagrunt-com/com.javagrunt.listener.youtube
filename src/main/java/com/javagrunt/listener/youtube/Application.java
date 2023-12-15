@@ -27,7 +27,10 @@ class YouTubeController {
 	}
 	
 	@GetMapping(value = "/")
-	String hello(){
-		return "OK";
+	String hello(@RequestParam("hub.mode") String mode,
+				 @RequestParam("hub.challenge") String challenge,
+				 @RequestParam("hub.topic") String topic) {
+		logger.info("Received: " + mode + " " + challenge + " " + topic);
+		return challenge;
 	}
 }
