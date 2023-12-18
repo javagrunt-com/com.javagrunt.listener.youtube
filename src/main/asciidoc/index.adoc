@@ -10,6 +10,10 @@ Check that the service is health:
 
 operation::health[snippets='httpie-request,response-body']
 
+Check the application information:
+
+operation::info[snippets='httpie-request,response-body']
+
 Post the Atom XML event to the service:
 
 operation::listen[snippets='httpie-request,response-body']

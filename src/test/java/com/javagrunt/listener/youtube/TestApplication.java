@@ -16,6 +16,13 @@ public class TestApplication {
         return new GenericContainer<>(DockerImageName.parse("openzipkin/zipkin:latest")).withExposedPorts(9411);
     }
 
+//    @Bean
+//    @ServiceConnection(name = "redis")
+//    GenericContainer<?> redisContainer() {
+//        return new GenericContainer<>(DockerImageName.parse("redis:latest")).withExposedPorts(6379);
+//    }
+
+
     public static void main(String[] args) {
         SpringApplication.from(Application::main).with(TestApplication.class).run(args);
     }

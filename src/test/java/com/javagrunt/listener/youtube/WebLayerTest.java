@@ -83,6 +83,21 @@ class WebLayerTest {
 				.then()
 				.assertThat().statusCode(is(200));
 	}
+
+	@Test
+	public void actuatorInfo() {
+		given(this.spec)
+				.filter(document("info",
+						preprocessRequest(modifyUris()
+								.scheme("https")
+								.host("youtube-listener.javagrunt.com")
+								.removePort())))
+				.when()
+				.port(this.port)
+				.get("/actuator/info")
+				.then()
+				.assertThat().statusCode(is(200));
+	}
 	
 	private String exampleEvent = """
 			<feed xmlns:yt="http://www.youtube.com/xml/schemas/2015"

@@ -8,7 +8,7 @@
 
 - Go to [PubSubHubbub Hub](https://pubsubhubbub.appspot.com/subscribe)
 - Enter the following details:
-  - Callback URL: We used [https://youtube-listener.javagrunt.com/]
+  - Callback URL: We used [https://youtube-listener.javagrunt.com]
   - Topic URL: https://www.youtube.com/xml/feeds/videos.xml?channel_id=YOUR_CHANNEL_ID
   - Mode: Subscribe
 
