@@ -16,6 +16,7 @@ public class Application {
 }
 
 @RestController
+@RequestMapping("/api")
 class YouTubeController {
 
 	Logger logger = LoggerFactory.getLogger(YouTubeController.class);

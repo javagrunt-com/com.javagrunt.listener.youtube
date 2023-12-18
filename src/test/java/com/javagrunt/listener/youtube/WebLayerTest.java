@@ -45,7 +45,7 @@ class WebLayerTest {
 								.removePort())))
 				.when()
 				.port(this.port)
-				.get("/?hub.mode=subscribe&hub.challenge=CHALLENGE_STRING&hub.topic=somthingcool")
+				.get("/api/?hub.mode=subscribe&hub.challenge=CHALLENGE_STRING&hub.topic=somthingcool")
 				.then()
 				.assertThat().statusCode(is(200))
 				.assertThat().body(is("CHALLENGE_STRING"));
@@ -63,7 +63,7 @@ class WebLayerTest {
 				.body(exampleEvent)
 				.when()
 				.port(this.port)
-				.post("/")
+				.post("/api/")
 				.then()
 				.assertThat()
 				.statusCode(is(200));
