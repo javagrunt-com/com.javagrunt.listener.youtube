@@ -19,7 +19,7 @@
     <dependency>
       <groupId>com.github.loki4j</groupId>
       <artifactId>loki-logback-appender</artifactId>
-      <version>1.4.1</version>
+      <version>1.5.0-m1</version>
     </dependency>
     <dependency>
       <groupId>com.rometools</groupId>
@@ -70,6 +70,12 @@
       <scope>test</scope>
     </dependency>
     <dependency>
+      <groupId>org.apache.maven.shared</groupId>
+      <artifactId>maven-invoker</artifactId>
+      <version>3.2.0</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-testcontainers</artifactId>
       <scope>test</scope>
@@ -87,6 +93,12 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>fr.brouillard.oss</groupId>
+      <artifactId>jgitver-maven-plugin</artifactId>
+      <version>1.9.0</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -158,6 +170,19 @@
             <name>dashaun/${project.name}:v${project.version}-${os.detected.arch}</name>
           </image>
         </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-failsafe-plugin</artifactId>
+        <version>3.2.3</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>integration-test</goal>
+              <goal>verify</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>

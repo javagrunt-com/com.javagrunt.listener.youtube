@@ -16,11 +16,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.redis.connection.RedisConnectionFactory;
-import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.data.redis.connection.lettuce.observability.MicrometerTracingAdapter;
 import org.springframework.data.redis.core.RedisHash;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.repository.configuration.EnableRedisRepositories;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.web.bind.annotation.*;
@@ -88,25 +85,13 @@ record YouTubeEvent(@Id String id, String entryXml){}
 @Configuration
 @EnableRedisRepositories
 class ApplicationConfig {
-
-//	@Bean
-//	public RedisConnectionFactory connectionFactory() {
-//		return new LettuceConnectionFactory();
-//	}
-//
-//	@Bean
-//	public RedisTemplate<?, ?> redisTemplate(RedisConnectionFactory redisConnectionFactory) {
-//		RedisTemplate<byte[], byte[]> template = new RedisTemplate<byte[], byte[]>();
-//		template.setConnectionFactory(redisConnectionFactory);
-//		return template;
-//	}
-//
-//	@Bean
-//	public ClientResources clientResources(ObservationRegistry observationRegistry) {
-//		return ClientResources.builder()
-//				.tracing(new MicrometerTracingAdapter(observationRegistry, "youtube-listener"))
-//				.build();
-//	}
+	
+	@Bean
+	public ClientResources clientResources(ObservationRegistry observationRegistry) {
+		return ClientResources.builder()
+				.tracing(new MicrometerTracingAdapter(observationRegistry, "youtube-listener"))
+				.build();
+	}
 }
 interface EventRepository extends CrudRepository<YouTubeEvent, String> {
 }
