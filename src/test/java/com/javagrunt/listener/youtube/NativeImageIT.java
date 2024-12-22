@@ -58,9 +58,9 @@ public class NativeImageIT extends AbstractAppTests {
             }
 
             if (System.getProperty("os.arch").contains("aarch")) {
-                return String.format("dashaun/com.javagrunt.listener.youtube:v%s-aarch_64", semanticVersion);
+                return "dashaun/com.javagrunt.listener.youtube:v%s-aarch_64".formatted(semanticVersion);
             } else {
-                return String.format("dashaun/com.javagrunt.listener.youtube:v%s-amd_64", semanticVersion);
+                return "dashaun/com.javagrunt.listener.youtube:v%s-amd_64".formatted(semanticVersion);
             }
         }
     };
